@@ -273,11 +273,9 @@
     </div>
     </div>
 
- <iframe width="0" height="0"
-  src="https://www.youtube.com/embed/ZIMzwfU4o4g?autoplay=1&loop=1&playlist=ZIMzwfU4o4g"
-  frameborder="0"
-  allow="autoplay">
-</iframe>
+<audio id="bgMusic" loop>
+  <source src="./image/thangcuoi.mp3" type="audio/mpeg">
+</audio>
 
 
 
@@ -483,6 +481,24 @@ document.addEventListener('mouseleave', () => {
 
 
     </script>
+
+    <script>
+  const music = document.getElementById("bgMusic");
+
+  // Thử phát ngay khi load
+  window.addEventListener("load", () => {
+    const playPromise = music.play();
+
+    // Nếu bị chặn => chờ click
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        document.addEventListener("click", () => {
+          music.play();
+        }, { once: true });
+      });
+    }
+  });
+</script>
     
 </body>
 
